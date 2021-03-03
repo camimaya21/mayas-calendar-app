@@ -1,9 +1,18 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import App from 'App';
+import React from 'react'
+import { render, screen } from '@testing-library/react'
+import App from 'App'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Maya's Calendar App/i);
-  expect(linkElement).toBeInTheDocument();
-});
+jest.mock('react-i18next', () => {
+  return {
+    useTranslation: () => ({
+      t: (key: string) => key.toUpperCase(),
+      ready: true
+    })
+  }
+})
+
+test('renders propertly', () => {
+  render(<App />)
+  const title = screen.getByText(/appTitle/i)
+  expect(title).toBeInTheDocument()
+})

@@ -1,12 +1,11 @@
-import React from 'react';
-import './App.css';
+import React from 'react'
+import { useTranslation } from 'react-i18next'
 
-function App() {
+const App: React.FC = () => {
+  const { t } = useTranslation()
   return (
     <div>
-      <header>
-        Maya's Calendar App
-      </header>
+      <header>{t('appTitle')}</header>
     </div>
   )
 }
