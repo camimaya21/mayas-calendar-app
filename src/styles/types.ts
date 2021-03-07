@@ -1,5 +1,5 @@
 export interface ICustomProps {
-  customMargin?: string
-  customPadding?: string
-  customFontSize?: string
+  customMargin?: string;
+  customPadding?: string;
+  customFontSize?: string;
 }
