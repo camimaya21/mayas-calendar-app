@@ -1,6 +1,6 @@
 import React from 'react'
 import { render } from '@testing-library/react'
-import { SFlexCenterCenter, SFlexCenterRow, SBasicContainer, STextCentered } from '../common'
+import { SFlexCenterCenter, SFlexCenterRow, SBasicContainer, STextCentered, SSection } from '../common'
 
 describe('Common Styled Components', () => {
   it('<SFlexCenterCenter> renders propertly', () => {
@@ -17,6 +17,10 @@ describe('Common Styled Components', () => {
   })
   it('<SBasicContainer> renders propertly', () => {
     const { container } = render(<SBasicContainer />)
+    expect(container).toBeInTheDocument()
+  })
+  it('<SSection> renders propertly', () => {
+    const { container } = render(<SSection />)
     expect(container).toBeInTheDocument()
   })
   it('<STextCentered> renders propertly', () => {
