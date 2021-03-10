@@ -1,7 +1,7 @@
 import { useQuery, UseQueryOptions, UseQueryResult } from 'react-query'
 import { AxiosError } from 'axios'
 import { findEvent, findEvents } from 'api/eventsApi'
-import { IEvent } from 'api/types'
+import { IEvent } from 'api/eventsApi.types'
 
 const _fetchEvents = async () => {
   const { data } = await findEvents()

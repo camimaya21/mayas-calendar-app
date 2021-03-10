@@ -1,6 +1,6 @@
 import { AxiosPromise } from 'axios'
 import { request } from './apiHandler'
-import { IEvent, ICreateEvent, IUpdateEvent, IDeleteEvent } from './types'
+import { IEvent, ICreateEvent, IUpdateEvent, IDeleteEvent } from './eventsApi.types'
 
 export const findEvents = (): AxiosPromise<IEvent[]> => {
   return request(`events`, { method: 'get' })
