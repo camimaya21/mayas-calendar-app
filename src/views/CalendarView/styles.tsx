@@ -15,4 +15,7 @@ export const SCalendarContainer = styled('div')`
   & .fc {
     width: 100%;
   }
+  & .fc-button:disabled {
+    opacity: 0.35;
+  }
 `

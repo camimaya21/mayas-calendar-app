@@ -116,30 +116,32 @@ export const globalStyles = css`
 
   /*CSS Theme Variables */
   :root {
-    --main-color: #0486c5; /* New Ringo color*/
+    --main-color: #4a9e9c;
+    --secondary-color: #35d2c3;
     --placeholder-color: #9ea1ab;
     --placeholder-error-color: rgba(242, 78, 78, 0.5);
     --ilde-bg-color: #f6f6f7;
     --title-color: #0e142c;
     --text-color: #6e7280;
     --second-modal-text-color: #3e4356;
-    --timer-bg-color: rgb(255 78 97 / 12%);
-    --input-text-color: #03263d;
-    --input-border-color: #0486c5;
     --main-bg-color: #fff;
     --content-bg-color: #fafafa;
-    --primary-color-500: #3c4d77;
-    --primary-color-400: #65769b;
-    --primary-color-300: #818fac;
-    --primary-color-200: #a3aec4;
-    --primary-color-100: #c6cedc;
-    --primary-color-50: #e9ebf0;
     --error-color: #f24e4e;
     --error-bg-msg: #faefef;
-    --success-bg-msg: #e4fffa;
     --info-bg-msg: #f8f9fa;
     --btn-text-color: #fff;
     --btn-bg-disabled: #c4c4c4;
     --container-border-color: #cfd0d5;
+    /*CSS Calendar Variables */
+    --fc-today-bg-color: #e4e7ffa6;
+    --fc-event-border-color: #7b63eb;
+    --fc-button-text-color: #fff;
+    --fc-button-bg-color: #4a9e9c;
+    --fc-button-border-color: #4a9e9c;
+    --fc-button-active-text-color: #0e142c;
+    --fc-button-active-bg-color: #35d2c3;
+    --fc-button-active-border-color: #35d2c3;
+    --fc-button-hover-bg-color: #4a9e9c;
+    --fc-button-hover-border-color: #4a9e9c;
   }
 `
