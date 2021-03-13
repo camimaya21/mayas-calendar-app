@@ -1,25 +1,26 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { Header } from 'components/Header'
-import Footer from 'components/Footer'
-import { SBasicContainer } from 'styles/common'
-import FullCalendar from '@fullcalendar/react'
+import FullCalendar, { EventClickArg } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
+
 import { useEvents } from 'hooks/queries/events'
 import { IEvent } from 'api/eventsApi.types'
+
+import Footer from 'components/Footer'
+import { LoadingDots } from 'components/Loading'
+import { SBasicContainer } from 'styles/common'
 import { SCalendarWrapper, SCalendarContainer } from './styles'
 
 export const CalendarView: React.FC = () => {
-  const { t } = useTranslation()
-  const { data, isSuccess } = useEvents()
+  const events = useEvents()
 
   const eventParse = (events: IEvent[] | undefined) => {
     if (!events) {
       return []
     }
     return events.map((e) => ({
+      id: e.id,
       title: e.title,
       start: e.startDate,
       end: e.endDate
@@ -34,12 +35,20 @@ export const CalendarView: React.FC = () => {
     console.log(arg.dateStr)
   }
 
+  const onEventClick = (arg: EventClickArg) => {
+    const eventId = arg.event._def.publicId
+    console.log('open Event details page', eventId)
+  }
+
+  if (events.isLoading) {
+    return <LoadingDots />
+  }
+
   return (
     <SBasicContainer>
-      <Header pageTitle={t('appTitle')} />
       <SCalendarWrapper>
         <SCalendarContainer>
-          {isSuccess && (
+          {events.isSuccess && (
             <>
               <FullCalendar
                 plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
@@ -59,9 +68,10 @@ export const CalendarView: React.FC = () => {
                     click: onAddEvent
                   }
                 }}
-                contentHeight={650}
-                events={eventParse(data)}
+                contentHeight={600}
+                events={eventParse(events.data)}
                 dateClick={onDateClick}
+                eventClick={onEventClick}
                 editable={true}
                 selectable={true}
               />
