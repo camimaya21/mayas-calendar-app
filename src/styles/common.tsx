@@ -19,9 +19,8 @@ export const SFlexCenterRow = styled('div')<ICustomProps>`
 `
 
 export const SBasicContainer = styled(SFlexCenterCenter)`
-  width: 100%;
+  width: 100vw;
   min-height: 100vh;
-  max-width: 800px;
   display: flex;
   flex: 0 1;
   flex-direction: column;
