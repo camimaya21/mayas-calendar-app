@@ -7,7 +7,9 @@ const _fetchEvents = async () => {
   const { data } = await findEvents()
   return data
 }
-export function useEvents<TData = IEvent[]>(options?: UseQueryOptions<IEvent[], AxiosError, TData>): UseQueryResult {
+export function useEvents<TData = IEvent[]>(
+  options?: UseQueryOptions<IEvent[], AxiosError, TData>
+): UseQueryResult<TData, AxiosError> {
   return useQuery('events', _fetchEvents, options)
 }
 
