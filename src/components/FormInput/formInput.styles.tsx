@@ -27,7 +27,7 @@ export const SSpanError = styled('span')`
 export const StyledFormField = styled('input')<IStyledInput>`
   position: relative;
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
   border: ${(props) => (props.error ? '1px' : '0')};
   border-color: ${(props) => (props.error ? 'var(--error-color)' : 'transparent')};
   border-radius: 0.5rem;

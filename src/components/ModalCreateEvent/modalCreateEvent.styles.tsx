@@ -4,6 +4,7 @@ export const SFormContainer = styled('div')`
   width: 100%;
   display: flex;
   flex-direction: column;
+  padding: 1rem;
 `
 
 export const SModalContent = styled('div')`

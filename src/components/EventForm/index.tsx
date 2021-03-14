@@ -1,37 +1,47 @@
 import React, { useState } from 'react'
-import { formatISO } from 'date-fns'
+import { useTranslation } from 'react-i18next'
+
+import { ICreateEvent, IUpdateEvent } from 'api/eventsApi.types'
+import { formatDatesToServer, formatDateToInput } from 'utils/datesFormat'
+import { IEventFormProps } from './eventForm.types'
 
 import { Form } from 'components/Form'
 import { Input } from 'components/FormInput'
-import { ICreateEvent } from 'api/eventsApi.types'
-
 import { Button } from 'components/Button'
-import { IEventFormProps } from './eventForm.types'
-import { useTranslation } from 'react-i18next'
 import { SBtnContainer } from 'styles/common'
 
-export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn }: IEventFormProps) => {
+export const EventForm: React.FC<IEventFormProps> = ({
+  initialValues,
+  onCreateEvent,
+  onUpdateEvent,
+  submitBtnText,
+  eventId
+}: IEventFormProps) => {
   const { t } = useTranslation()
-  const [formData, setFormData] = useState<ICreateEvent>(initialValues)
+  const [formData, setFormData] = useState<ICreateEvent>({
+    ...initialValues,
+    startDate: formatDateToInput(initialValues.startDate),
+    endDate: formatDateToInput(initialValues.endDate)
+  })
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const data = { ...formData, [e.target.name]: e.target.value }
     setFormData(data)
   }
 
-  const formatDates = (date: string) => {
-    return formatISO(new Date(date))
-  }
-
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const formDataParsed: ICreateEvent = {
+    const formDataParsed: ICreateEvent | IUpdateEvent = {
       ...formData,
-      startDate: formatDates(formData.startDate),
-      endDate: formatDates(formData.endDate)
+      startDate: formatDatesToServer(formData.startDate),
+      endDate: formatDatesToServer(formData.endDate)
     }
-    console.log(formDataParsed)
-    onSubmitFn(formDataParsed)
+    if (onCreateEvent) {
+      return onCreateEvent(formDataParsed)
+    }
+    if (onUpdateEvent) {
+      return onUpdateEvent({ ...formDataParsed, id: eventId || '' })
+    }
   }
 
   return (
@@ -39,6 +49,7 @@ export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn
       <Input
         name="title"
         type="text"
+        required
         value={formData.title}
         onChange={handleOnChange}
         moreProps={{
@@ -51,6 +62,7 @@ export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn
       <Input
         name="description"
         type="text"
+        required
         value={formData.description}
         onChange={handleOnChange}
         moreProps={{
@@ -62,7 +74,8 @@ export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn
       />
       <Input
         name="startDate"
-        type="text"
+        type="datetime-local"
+        required
         value={formData.startDate}
         onChange={handleOnChange}
         moreProps={{
@@ -73,7 +86,8 @@ export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn
       />
       <Input
         name="endDate"
-        type="text"
+        type="datetime-local"
+        required
         value={formData.endDate}
         onChange={handleOnChange}
         moreProps={{
@@ -82,8 +96,8 @@ export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn
           showInputErrors: false
         }}
       />
-      <SBtnContainer>
-        <Button text={t('eventForm.submitBtn')} primary width="100%" />
+      <SBtnContainer customPadding={'1rem 0 0 0'}>
+        <Button text={submitBtnText} primary width="100%" />
       </SBtnContainer>
     </Form>
   )
