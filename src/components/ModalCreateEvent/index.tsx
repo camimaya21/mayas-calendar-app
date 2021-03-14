@@ -8,8 +8,13 @@ import { addHours, format } from 'date-fns'
 import { ICreateEvent } from 'api/eventsApi.types'
 import { useCreateEvent } from 'hooks/mutations/events'
 import { IModalCreateEventProps } from './modalCreateEvent.types'
+import { useTranslation } from 'react-i18next'
 
-export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({ onSuccessSubmit }: IModalCreateEventProps) => {
+export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({
+  onSuccessSubmit,
+  onCloseModal
+}: IModalCreateEventProps) => {
+  const { t } = useTranslation()
   const createEvent = useCreateEvent()
 
   const initialValues = {
@@ -30,7 +35,7 @@ export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({ onSuccessSu
   return (
     <ModalWrapper>
       <SModalContent>
-        <Header pageTitle={'Add Event'} />
+        <Header pageTitle={t('modalCreateEvent.header')} close onClickIcon={onCloseModal} />
         <SFormContainer>
           <EventForm initialValues={initialValues} onSubmitFn={handleOnCreateEvent} />
         </SFormContainer>

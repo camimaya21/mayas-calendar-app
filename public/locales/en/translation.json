@@ -20,5 +20,8 @@
       "label": "Ends at"
     },
     "submitBtn": "Add event"
+  },
+  "modalCreateEvent": {
+    "header": "Create event"
   }
 }

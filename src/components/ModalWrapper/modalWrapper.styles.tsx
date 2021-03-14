@@ -10,7 +10,7 @@ export const SOverlay = styled('div')`
 `
 
 export const SModalContainer = styled('div')`
-  width: 340px;
+  width: 375px;
   min-height: 368px;
   height: max-content;
   display: flex;
@@ -18,7 +18,6 @@ export const SModalContainer = styled('div')`
   border-radius: 16px;
   box-shadow: 0 4px 32px 0 rgba(0, 0, 0, 0.08);
   background-color: #ffffff;
-  padding: 1rem;
   z-index: 999;
   position: absolute;
   margin: auto;

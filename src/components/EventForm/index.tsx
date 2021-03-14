@@ -8,6 +8,7 @@ import { ICreateEvent } from 'api/eventsApi.types'
 import { Button } from 'components/Button'
 import { IEventFormProps } from './eventForm.types'
 import { useTranslation } from 'react-i18next'
+import { SBtnContainer } from 'styles/common'
 
 export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn }: IEventFormProps) => {
   const { t } = useTranslation()
@@ -81,7 +82,9 @@ export const EventForm: React.FC<IEventFormProps> = ({ initialValues, onSubmitFn
           showInputErrors: false
         }}
       />
-      <Button text={t('eventForm.submitBtn')} primary width="100%" />
+      <SBtnContainer>
+        <Button text={t('eventForm.submitBtn')} primary width="100%" />
+      </SBtnContainer>
     </Form>
   )
 }

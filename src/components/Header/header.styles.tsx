@@ -36,7 +36,8 @@ export const SHeader = styled('header')<ISHeader>`
     text-decoration: none;
     z-index: 3;
   }
-  & button {
+  & > button {
+    margin: 0;
     border: none;
     background: #fff;
     z-index: 4;

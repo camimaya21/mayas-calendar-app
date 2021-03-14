@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import FullCalendar, { EventClickArg } from '@fullcalendar/react'
+import esLocale from '@fullcalendar/core/locales/es'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
@@ -29,13 +30,12 @@ export const CalendarView: React.FC = () => {
     }))
   }
 
-  const onAddEvent = () => {
-    setOpenNewEventModal(true)
-  }
+  const onAddEvent = () => setOpenNewEventModal(true)
+  const closeModal = () => setOpenNewEventModal(false)
 
   const onSuccessAddEvent = () => {
     events.refetch()
-    setOpenNewEventModal(false)
+    closeModal()
   }
 
   const onDateClick = (arg: DateClickArg) => {
@@ -58,7 +58,7 @@ export const CalendarView: React.FC = () => {
 
   return (
     <>
-      {openNewEventModal && <ModalCreateEvent onSuccessSubmit={onSuccessAddEvent} />}
+      {openNewEventModal && <ModalCreateEvent onSuccessSubmit={onSuccessAddEvent} onCloseModal={closeModal} />}
       <SBasicContainer>
         <SCalendarWrapper>
           <SCalendarContainer>
@@ -67,6 +67,8 @@ export const CalendarView: React.FC = () => {
                 <FullCalendar
                   plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
                   initialView="dayGridMonth"
+                  locales={[esLocale]}
+                  locale={'es'}
                   headerToolbar={{
                     left: 'prev,next',
                     center: 'title',

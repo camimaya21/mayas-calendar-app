@@ -20,5 +20,8 @@
       "label": "Fecha fin"
     },
     "submitBtn": "Crear evento"
+  },
+  "modalCreateEvent": {
+    "header": "Crear Evento"
   }
 }

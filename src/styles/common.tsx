@@ -52,3 +52,19 @@ export const STextCentered = styled('div')`
   width: 100%;
   text-align: center;
 `
+
+export const SBtnContainer = styled('div')<ICustomProps>`
+  width: 100%;
+  padding: ${(props) => (props.customPadding ? props.customPadding : '1rem')};
+`
+
+export const SBtnsContainer = styled('div')<ICustomProps>`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: ${(props) => (props.customPadding ? props.customPadding : '1rem')};
+  & :first-of-type {
+    margin-right: 0.5rem;
+  }
+`
