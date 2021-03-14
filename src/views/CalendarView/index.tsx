@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FullCalendar, { EventClickArg } from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
@@ -7,13 +7,15 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
 import { useEvents } from 'hooks/queries/events'
 import { IEvent } from 'api/eventsApi.types'
 
-import Footer from 'components/Footer'
+import { ModalCreateEvent } from 'components/ModalCreateEvent'
 import { LoadingDots } from 'components/Loading'
+import Footer from 'components/Footer'
 import { SBasicContainer } from 'styles/common'
 import { SCalendarWrapper, SCalendarContainer } from './styles'
 
 export const CalendarView: React.FC = () => {
   const events = useEvents()
+  const [openNewEventModal, setOpenNewEventModal] = useState(false)
 
   const eventParse = (events: IEvent[] | undefined) => {
     if (!events) {
@@ -29,6 +31,7 @@ export const CalendarView: React.FC = () => {
 
   const onAddEvent = () => {
     console.log('add event')
+    setOpenNewEventModal(true)
   }
 
   const onDateClick = (arg: DateClickArg) => {
@@ -41,45 +44,52 @@ export const CalendarView: React.FC = () => {
   }
 
   if (events.isLoading) {
-    return <LoadingDots />
+    return (
+      <SBasicContainer>
+        <LoadingDots />
+      </SBasicContainer>
+    )
   }
 
   return (
-    <SBasicContainer>
-      <SCalendarWrapper>
-        <SCalendarContainer>
-          {events.isSuccess && (
-            <>
-              <FullCalendar
-                plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                  left: 'prev,next',
-                  center: 'title',
-                  right: 'customAddBtn'
-                }}
-                footerToolbar={{
-                  left: 'today',
-                  right: 'dayGridMonth,listMonth'
-                }}
-                customButtons={{
-                  customAddBtn: {
-                    text: '+',
-                    click: onAddEvent
-                  }
-                }}
-                contentHeight={600}
-                events={eventParse(events.data)}
-                dateClick={onDateClick}
-                eventClick={onEventClick}
-                editable={true}
-                selectable={true}
-              />
-            </>
-          )}
-        </SCalendarContainer>
-      </SCalendarWrapper>
-      <Footer />
-    </SBasicContainer>
+    <>
+      {openNewEventModal && <ModalCreateEvent />}
+      <SBasicContainer>
+        <SCalendarWrapper>
+          <SCalendarContainer>
+            {events.isSuccess && (
+              <>
+                <FullCalendar
+                  plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
+                  initialView="dayGridMonth"
+                  headerToolbar={{
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'customAddBtn'
+                  }}
+                  footerToolbar={{
+                    left: 'today',
+                    right: 'dayGridMonth,listMonth'
+                  }}
+                  customButtons={{
+                    customAddBtn: {
+                      text: '+',
+                      click: onAddEvent
+                    }
+                  }}
+                  contentHeight={600}
+                  events={eventParse(events.data)}
+                  dateClick={onDateClick}
+                  eventClick={onEventClick}
+                  editable={true}
+                  selectable={true}
+                />
+              </>
+            )}
+          </SCalendarContainer>
+        </SCalendarWrapper>
+        <Footer />
+      </SBasicContainer>
+    </>
   )
 }
