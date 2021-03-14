@@ -5,15 +5,15 @@ export const formatDatesToServer = (date: string): string => {
 }
 
 export const formatDateToInput = (date: string): string => {
-  return format(new Date(date), "yyyy-MM-dd'T'HH:mm:ss")
+  return format(new Date(date), "yyyy-MM-dd'T'HH:mm")
 }
 
 export const formatTodayToInput = (): string => {
-  return format(new Date(), "yyyy-MM-dd'T'HH:mm:ss")
+  return format(new Date(), "yyyy-MM-dd'T'HH:mm")
 }
 
 export const formatTodayAddHours = (hour: number): string => {
-  return format(addHours(new Date(), hour), "yyyy-MM-dd'T'HH:mm:ss")
+  return format(addHours(new Date(), hour), "yyyy-MM-dd'T'HH:mm")
 }
 
 export const formatDateToHuman = (date: string): string => {
