@@ -1,22 +1,26 @@
 import React from 'react'
 import { IHeaderProps } from './header.types'
-import { BurgerIcon, CloseIcon } from 'components/Icons'
+import { BackIcon, BurgerIcon, CloseIcon } from 'components/Icons'
 import { SHeader } from './header.styles'
 
-export const Header: React.FC<IHeaderProps> = ({ pageTitle, close, burger, margin, onClickIcon }: IHeaderProps) => {
+export const Header: React.FC<IHeaderProps> = ({
+  pageTitle,
+  close,
+  burger,
+  back,
+  margin,
+  onClickIcon,
+  children
+}: IHeaderProps) => {
   return (
     <SHeader margin={margin}>
-      {burger && (
-        <button onClick={onClickIcon}>
-          <BurgerIcon />
-        </button>
-      )}
+      <button className="icons" onClick={onClickIcon}>
+        {burger && <BurgerIcon />}
+        {back && <BackIcon />}
+        {close && <CloseIcon />}
+      </button>
       <h1>{pageTitle}</h1>
-      {close && (
-        <button onClick={onClickIcon}>
-          <CloseIcon />
-        </button>
-      )}
+      {children}
     </SHeader>
   )
 }

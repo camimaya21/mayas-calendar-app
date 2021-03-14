@@ -1,4 +1,5 @@
 import BurgerIcon from './BurgerIcon'
+import BackIcon from './BackIcon'
 import CloseIcon from './CloseIcon'
 
-export { BurgerIcon, CloseIcon }
+export { BurgerIcon, BackIcon, CloseIcon }

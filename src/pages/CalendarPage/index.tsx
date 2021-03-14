@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useHistory } from 'react-router'
 import FullCalendar, { EventClickArg } from '@fullcalendar/react'
 import esLocale from '@fullcalendar/core/locales/es'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -12,9 +13,11 @@ import { ModalCreateEvent } from 'components/ModalCreateEvent'
 import { LoadingDots } from 'components/Loading'
 import Footer from 'components/Footer'
 import { SBasicContainer } from 'styles/common'
-import { SCalendarWrapper, SCalendarContainer } from './styles'
+import { SCalendarWrapper, SCalendarContainer } from './calendarPage.styles'
+import { pages } from 'routes/urls'
 
-export const CalendarView: React.FC = () => {
+const CalendarPage: React.FC = () => {
+  const history = useHistory()
   const events = useEvents()
   const [openNewEventModal, setOpenNewEventModal] = useState(false)
 
@@ -45,7 +48,7 @@ export const CalendarView: React.FC = () => {
 
   const onEventClick = (arg: EventClickArg) => {
     const eventId = arg.event._def.publicId
-    console.log('open Event details page', eventId)
+    history.push(pages.eventDetail(eventId))
   }
 
   if (events.isLoading) {
@@ -100,3 +103,5 @@ export const CalendarView: React.FC = () => {
     </>
   )
 }
+
+export default CalendarPage
