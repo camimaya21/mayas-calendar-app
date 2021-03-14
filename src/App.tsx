@@ -1,13 +1,8 @@
 import React from 'react'
-import { useTranslation } from 'react-i18next'
+import { CalendarView } from 'views/CalendarView'
 
 const App: React.FC = () => {
-  const { t } = useTranslation()
-  return (
-    <div>
-      <header>{t('appTitle')}</header>
-    </div>
-  )
+  return <CalendarView />
 }
 
 export default App

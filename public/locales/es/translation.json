@@ -1,3 +1,7 @@
 {
-  "appTitle": "Maya's Calendar App"
+  "appTitle": "Maya's Calendar App ",
+  "footer": {
+    "text": " - A project made with ",
+    "by": " by "
+  }
 }
