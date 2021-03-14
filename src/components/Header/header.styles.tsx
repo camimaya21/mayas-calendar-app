@@ -10,7 +10,7 @@ export const SHeader = styled('header')<ISHeader>`
   position: relative;
   justify-content: space-between;
   margin: ${(props) => (props.margin ? props.margin : '0')};
-  border: 1px solid var(--ilde-bg-color);
+  border-bottom: 1px solid var(--ilde-bg-color);
   & h1 {
     font-size: 1.1rem;
     font-weight: 500;
@@ -36,7 +36,8 @@ export const SHeader = styled('header')<ISHeader>`
     text-decoration: none;
     z-index: 3;
   }
-  & button {
+  & > button {
+    margin: 0;
     border: none;
     background: #fff;
     z-index: 4;
