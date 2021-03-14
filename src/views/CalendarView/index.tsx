@@ -30,11 +30,16 @@ export const CalendarView: React.FC = () => {
   }
 
   const onAddEvent = () => {
-    console.log('add event')
     setOpenNewEventModal(true)
   }
 
+  const onSuccessAddEvent = () => {
+    events.refetch()
+    setOpenNewEventModal(false)
+  }
+
   const onDateClick = (arg: DateClickArg) => {
+    // TODO
     console.log(arg.dateStr)
   }
 
@@ -53,7 +58,7 @@ export const CalendarView: React.FC = () => {
 
   return (
     <>
-      {openNewEventModal && <ModalCreateEvent />}
+      {openNewEventModal && <ModalCreateEvent onSuccessSubmit={onSuccessAddEvent} />}
       <SBasicContainer>
         <SCalendarWrapper>
           <SCalendarContainer>
