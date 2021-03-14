@@ -132,6 +132,7 @@ export const globalStyles = css`
     --btn-text-color: #fff;
     --btn-bg-disabled: #c4c4c4;
     --container-border-color: #cfd0d5;
+    --modal-bg-color: #f6f6f7;
     /*CSS Calendar Variables */
     --fc-today-bg-color: #e4e7ffa6;
     --fc-event-border-color: #7b63eb;

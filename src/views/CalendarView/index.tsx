@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import FullCalendar, { EventClickArg } from '@fullcalendar/react'
+import esLocale from '@fullcalendar/core/locales/es'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import listPlugin from '@fullcalendar/list'
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
@@ -7,13 +8,15 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
 import { useEvents } from 'hooks/queries/events'
 import { IEvent } from 'api/eventsApi.types'
 
-import Footer from 'components/Footer'
+import { ModalCreateEvent } from 'components/ModalCreateEvent'
 import { LoadingDots } from 'components/Loading'
+import Footer from 'components/Footer'
 import { SBasicContainer } from 'styles/common'
 import { SCalendarWrapper, SCalendarContainer } from './styles'
 
 export const CalendarView: React.FC = () => {
   const events = useEvents()
+  const [openNewEventModal, setOpenNewEventModal] = useState(false)
 
   const eventParse = (events: IEvent[] | undefined) => {
     if (!events) {
@@ -27,11 +30,16 @@ export const CalendarView: React.FC = () => {
     }))
   }
 
-  const onAddEvent = () => {
-    console.log('add event')
+  const onAddEvent = () => setOpenNewEventModal(true)
+  const closeModal = () => setOpenNewEventModal(false)
+
+  const onSuccessAddEvent = () => {
+    events.refetch()
+    closeModal()
   }
 
   const onDateClick = (arg: DateClickArg) => {
+    // TODO
     console.log(arg.dateStr)
   }
 
@@ -41,45 +49,54 @@ export const CalendarView: React.FC = () => {
   }
 
   if (events.isLoading) {
-    return <LoadingDots />
+    return (
+      <SBasicContainer>
+        <LoadingDots />
+      </SBasicContainer>
+    )
   }
 
   return (
-    <SBasicContainer>
-      <SCalendarWrapper>
-        <SCalendarContainer>
-          {events.isSuccess && (
-            <>
-              <FullCalendar
-                plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
-                initialView="dayGridMonth"
-                headerToolbar={{
-                  left: 'prev,next',
-                  center: 'title',
-                  right: 'customAddBtn'
-                }}
-                footerToolbar={{
-                  left: 'today',
-                  right: 'dayGridMonth,listMonth'
-                }}
-                customButtons={{
-                  customAddBtn: {
-                    text: '+',
-                    click: onAddEvent
-                  }
-                }}
-                contentHeight={600}
-                events={eventParse(events.data)}
-                dateClick={onDateClick}
-                eventClick={onEventClick}
-                editable={true}
-                selectable={true}
-              />
-            </>
-          )}
-        </SCalendarContainer>
-      </SCalendarWrapper>
-      <Footer />
-    </SBasicContainer>
+    <>
+      {openNewEventModal && <ModalCreateEvent onSuccessSubmit={onSuccessAddEvent} onCloseModal={closeModal} />}
+      <SBasicContainer>
+        <SCalendarWrapper>
+          <SCalendarContainer>
+            {events.isSuccess && (
+              <>
+                <FullCalendar
+                  plugins={[dayGridPlugin, interactionPlugin, listPlugin]}
+                  initialView="dayGridMonth"
+                  locales={[esLocale]}
+                  locale={'es'}
+                  headerToolbar={{
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'customAddBtn'
+                  }}
+                  footerToolbar={{
+                    left: 'today',
+                    right: 'dayGridMonth,listMonth'
+                  }}
+                  customButtons={{
+                    customAddBtn: {
+                      text: '+',
+                      click: onAddEvent
+                    }
+                  }}
+                  contentHeight={600}
+                  events={eventParse(events.data)}
+                  dateClick={onDateClick}
+                  eventClick={onEventClick}
+                  editable={true}
+                  selectable={true}
+                />
+              </>
+            )}
+          </SCalendarContainer>
+        </SCalendarWrapper>
+        <Footer />
+      </SBasicContainer>
+    </>
   )
 }

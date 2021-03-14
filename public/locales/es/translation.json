@@ -1,7 +1,27 @@
 {
   "appTitle": "Maya's Calendar App ",
   "footer": {
-    "text": " - A project made with ",
-    "by": " by "
+    "text": " - Un proyecto hecho con  ",
+    "by": " por "
+  },
+  "eventForm": {
+    "title": {
+      "label": "Título",
+      "placeholder": "Escribe el título de tu evento"
+    },
+    "description": {
+      "label": "Descripción",
+      "placeholder": "Escribe una descripción de tu evento"
+    },
+    "startDate": {
+      "label": "Fecha inicio"
+    },
+    "endDate": {
+      "label": "Fecha fin"
+    },
+    "submitBtn": "Crear evento"
+  },
+  "modalCreateEvent": {
+    "header": "Crear Evento"
   }
 }
