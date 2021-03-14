@@ -24,7 +24,7 @@ export const SButton = styled('button')<ISButton>`
   &:hover,
   &:focus {
     background-color: ${(props) => (props.primary ? 'var(--primary-color-400)' : 'var(--main-color)')};
-    color: var(--btn-text-color);
+    color: ${(props) => (props.primary ? 'var(--main-color)' : 'var(--btn-text-color)')};
     outline-color: var(--primary-color-500);
   }
   &:disabled {
