@@ -23,5 +23,14 @@
   },
   "modalCreateEvent": {
     "header": "Crear Evento"
+  },
+  "eventDetails": {
+    "header": "Detalles Evento",
+    "title": "Título:",
+    "description": "Descripción:",
+    "startDate": "Empieza:",
+    "endDate": "Termina:",
+    "deleteBtn": "Borrar evento",
+    "updateBtn": "Actualizar evento"
   }
 }

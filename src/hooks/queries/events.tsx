@@ -20,6 +20,6 @@ const _fetchEvent = async (id: string) => {
 export function useEvent<TData = IEvent>(
   eventId: string,
   options?: UseQueryOptions<IEvent, AxiosError, TData>
-): UseQueryResult {
+): UseQueryResult<TData, AxiosError> {
   return useQuery(['event', eventId], () => _fetchEvent(eventId), options)
 }
