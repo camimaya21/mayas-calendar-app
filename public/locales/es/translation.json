@@ -31,6 +31,7 @@
     "startDate": "Empieza:",
     "endDate": "Termina:",
     "deleteBtn": "Borrar evento",
-    "updateBtn": "Actualizar evento"
+    "updateBtn": "Actualizar evento",
+    "cancelBtn": "Cancelar"
   }
 }

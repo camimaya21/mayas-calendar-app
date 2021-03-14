@@ -7,9 +7,6 @@ export const SDetailsContainer = styled('div')`
   & h2 {
     font-size: 2rem;
   }
-  & button {
-    margin-top: 2rem;
-  }
 `
 
 export const SLabel = styled('p')`

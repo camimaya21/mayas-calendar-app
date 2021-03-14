@@ -1,14 +1,15 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { formatTodayToInput, formatTodayAddHours } from 'utils/datesFormat'
+
+import { ICreateEvent } from 'api/eventsApi.types'
+import { useCreateEvent } from 'hooks/mutations/events'
+import { IModalCreateEventProps } from './modalCreateEvent.types'
 
 import { EventForm } from 'components/EventForm'
 import { Header } from 'components/Header'
 import { ModalWrapper } from 'components/ModalWrapper'
 import { SFormContainer, SModalContent } from './modalCreateEvent.styles'
-import { addHours, format } from 'date-fns'
-import { ICreateEvent } from 'api/eventsApi.types'
-import { useCreateEvent } from 'hooks/mutations/events'
-import { IModalCreateEventProps } from './modalCreateEvent.types'
-import { useTranslation } from 'react-i18next'
 
 export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({
   onSuccessSubmit,
@@ -20,8 +21,8 @@ export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({
   const initialValues = {
     title: '',
     description: '',
-    startDate: format(new Date(), 'Pp'),
-    endDate: format(addHours(new Date(), 1), 'Pp')
+    startDate: formatTodayToInput(),
+    endDate: formatTodayAddHours(1)
   }
 
   const handleOnCreateEvent = (formData: ICreateEvent) => {
@@ -37,7 +38,11 @@ export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({
       <SModalContent>
         <Header pageTitle={t('modalCreateEvent.header')} close onClickIcon={onCloseModal} />
         <SFormContainer>
-          <EventForm initialValues={initialValues} onSubmitFn={handleOnCreateEvent} />
+          <EventForm
+            initialValues={initialValues}
+            submitBtnText={t('eventForm.submitBtn')}
+            onCreateEvent={handleOnCreateEvent}
+          />
         </SFormContainer>
       </SModalContent>
     </ModalWrapper>

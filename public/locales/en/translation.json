@@ -31,6 +31,7 @@
     "startDate": "Starts at:",
     "endDate": "Ends at:",
     "deleteBtn": "Delete event",
-    "updateBtn": "Update event"
+    "updateBtn": "Update event",
+    "cancelBtn": "Cancelar"
   }
 }

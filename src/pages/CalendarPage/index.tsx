@@ -8,13 +8,13 @@ import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
 
 import { useEvents } from 'hooks/queries/events'
 import { IEvent } from 'api/eventsApi.types'
+import { pages } from 'routes/urls'
 
 import { ModalCreateEvent } from 'components/ModalCreateEvent'
 import { LoadingDots } from 'components/Loading'
 import Footer from 'components/Footer'
 import { SBasicContainer } from 'styles/common'
 import { SCalendarWrapper, SCalendarContainer } from './calendarPage.styles'
-import { pages } from 'routes/urls'
 
 const CalendarPage: React.FC = () => {
   const history = useHistory()
