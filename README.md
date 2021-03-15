@@ -5,6 +5,14 @@ This app has been built with React + Typescript :smile:
 
 <img width="1439" alt="Captura de pantalla 2021-03-15 a las 20 06 23" src="https://user-images.githubusercontent.com/31632069/111207449-eca3a380-85c9-11eb-9cec-6ad82a7976c4.png">
 
+## The easy way to start :rocket:
+
+Use `startDev.sh` script to easily start the project :wink:
+
+```bash
+$ chmod +x startDev.sh
+$ sh startDev.sh
+```
 
 ## How to start:
 
