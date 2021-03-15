@@ -1,0 +1,10 @@
+# Build Stage
+FROM docker.io/node:lts-alpine AS builder
+WORKDIR /usr/src/app
+COPY . .
+
+RUN yarn global add react-scripts@3.4.0; 
+RUN yarn
+
+
+CMD ["yarn", "start"]
