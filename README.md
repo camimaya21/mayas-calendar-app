@@ -3,6 +3,8 @@
 Manage your own events and display them into a calendar view.
 This app has been built with React + Typescript :smile: 
 
+<img width="1439" alt="Captura de pantalla 2021-03-15 a las 20 06 23" src="https://user-images.githubusercontent.com/31632069/111207449-eca3a380-85c9-11eb-9cec-6ad82a7976c4.png">
+
 
 ## How to start:
 
@@ -42,6 +44,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
+
 
 ### `yarn test`
 
