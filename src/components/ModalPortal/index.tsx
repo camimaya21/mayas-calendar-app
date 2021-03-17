@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
-import { IModalPortal } from './modal.types'
+import { IModalPortal } from './modalPortal.types'
 
 let modalRoot: HTMLElement = document.getElementById('modal-root') as HTMLElement
 if (!modalRoot) {
@@ -9,7 +9,7 @@ if (!modalRoot) {
   document.body.appendChild(modalRoot)
 }
 
-export const Modal: React.FC<IModalPortal> = ({ children }) => {
+export const ModalPortal: React.FC<IModalPortal> = ({ children }) => {
   const element = useRef(document.createElement('div'))
 
   useEffect(() => {

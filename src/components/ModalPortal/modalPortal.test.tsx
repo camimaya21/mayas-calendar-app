@@ -2,7 +2,7 @@
 import React from 'react'
 import { render, within } from '@testing-library/react'
 
-import { Modal } from '.'
+import { ModalPortal } from '.'
 
 jest.mock('react-i18next', () => {
   return {
@@ -15,9 +15,9 @@ jest.mock('react-i18next', () => {
 
 test('modal shows the children', () => {
   render(
-    <Modal>
+    <ModalPortal>
       <h2>This is a modal test.</h2>
-    </Modal>
+    </ModalPortal>
   )
   // @ts-ignore
   const { getByText } = within(document.getElementById('modal-root'))

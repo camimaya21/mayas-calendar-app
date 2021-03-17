@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router'
+import { useQueryClient } from 'react-query'
 
 import { useDeleteEvent, useUpdateEvent } from 'hooks/mutations/events'
 import { useEvent } from 'hooks/queries/events'
@@ -9,27 +10,30 @@ import { IUpdateEvent } from 'api/eventsApi.types'
 
 import { Button } from 'components/Button'
 import { EventForm } from 'components/EventForm'
+import { EventDetails } from 'components/EventDetails'
 import { Header } from 'components/Header'
 import { LoadingDots } from 'components/Loading'
-import { SDetailsContainer, SLabel } from './eventDetailsPage.styles'
+import { SDetailsContainer } from './eventDetailsPage.styles'
 import { SBasicContainer, SBtnContainer, SBtnsContainer, SSection } from 'styles/common'
-import { formatDateToHuman } from 'utils/datesFormat'
 
 const EventDetailPage: React.FC = () => {
   const { t } = useTranslation()
   const { eventId } = useParams<{ eventId: string }>()
   const history = useHistory()
+  const queryClient = useQueryClient()
   const event = useEvent(eventId)
   const deleteEvent = useDeleteEvent()
   const updateEvent = useUpdateEvent()
   const [showUpdateForm, setShowUpdateForm] = useState(false)
 
   const goBackToHome = () => history.push(pages.home)
+  const openUpdateForm = () => setShowUpdateForm(true)
+  const closeUpdateForm = () => setShowUpdateForm(false)
 
   const onDeleteEvent = () => {
     deleteEvent.mutate(eventId, {
       onSuccess: () => {
-        window.alert('Event deleted')
+        queryClient.invalidateQueries('events')
         goBackToHome()
       }
     })
@@ -38,8 +42,8 @@ const EventDetailPage: React.FC = () => {
   const onUpdateEvent = (dataUpdated: IUpdateEvent) => {
     updateEvent.mutate(dataUpdated, {
       onSuccess: () => {
-        event.refetch()
-        setShowUpdateForm(false)
+        queryClient.invalidateQueries(['event', eventId])
+        closeUpdateForm()
       }
     })
   }
@@ -61,17 +65,10 @@ const EventDetailPage: React.FC = () => {
             <SDetailsContainer>
               {!showUpdateForm ? (
                 <>
-                  <SLabel>{t('eventDetails.title')}</SLabel>
-                  <h2>{event.data?.title}</h2>
-                  <SLabel>{t('eventDetails.description')}</SLabel>
-                  <p>{event.data?.description}</p>
-                  <SLabel>{t('eventDetails.startDate')}</SLabel>
-                  <p>{formatDateToHuman(event.data?.startDate)}</p>
-                  <SLabel>{t('eventDetails.endDate')}</SLabel>
-                  <p>{formatDateToHuman(event.data?.endDate)}</p>
+                  <EventDetails eventData={event.data} />
                   <SBtnsContainer>
                     <Button text={t('eventDetails.deleteBtn')} onClickFn={onDeleteEvent} />
-                    <Button text={t('eventDetails.updateBtn')} primary onClickFn={() => setShowUpdateForm(true)} />
+                    <Button text={t('eventDetails.updateBtn')} primary onClickFn={openUpdateForm} />
                   </SBtnsContainer>
                 </>
               ) : (
@@ -83,11 +80,7 @@ const EventDetailPage: React.FC = () => {
                     eventId={eventId}
                   />
                   <SBtnContainer customPadding={'0'}>
-                    <Button
-                      width="100%"
-                      text={t('eventDetails.cancelBtn')}
-                      onClickFn={() => setShowUpdateForm(false)}
-                    />
+                    <Button width="100%" text={t('eventDetails.cancelBtn')} onClickFn={closeUpdateForm} />
                   </SBtnContainer>
                 </>
               )}

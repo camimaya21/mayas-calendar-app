@@ -10,7 +10,12 @@ const _fetchEvents = async () => {
 export function useEvents<TData = IEvent[]>(
   options?: UseQueryOptions<IEvent[], AxiosError, TData>
 ): UseQueryResult<TData, AxiosError> {
-  return useQuery('events', _fetchEvents, options)
+  const customOptions: UseQueryOptions<IEvent[], AxiosError, TData> = {
+    ...options,
+    notifyOnChangeProps: ['data', 'error'],
+    staleTime: 60 * 1000 // 1 minute
+  }
+  return useQuery('events', _fetchEvents, customOptions)
 }
 
 const _fetchEvent = async (id: string) => {
@@ -21,5 +26,10 @@ export function useEvent<TData = IEvent>(
   eventId: string,
   options?: UseQueryOptions<IEvent, AxiosError, TData>
 ): UseQueryResult<TData, AxiosError> {
-  return useQuery(['event', eventId], () => _fetchEvent(eventId), options)
+  const customOptions: UseQueryOptions<IEvent, AxiosError, TData> = {
+    ...options,
+    notifyOnChangeProps: ['data', 'error'],
+    staleTime: 60 * 1000 * 5 // 5 minute
+  }
+  return useQuery(['event', eventId], () => _fetchEvent(eventId), customOptions)
 }

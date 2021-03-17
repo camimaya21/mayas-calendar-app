@@ -8,8 +8,3 @@ export const SDetailsContainer = styled('div')`
     font-size: 2rem;
   }
 `
-
-export const SLabel = styled('p')`
-  font-weight: bold;
-  margin: 2rem 0 1rem 0;
-`

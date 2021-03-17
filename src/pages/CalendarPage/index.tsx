@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router'
+import { useQueryClient } from 'react-query'
 import FullCalendar, { EventClickArg } from '@fullcalendar/react'
 import esLocale from '@fullcalendar/core/locales/es'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -19,6 +20,7 @@ import { SCalendarWrapper, SCalendarContainer } from './calendarPage.styles'
 const CalendarPage: React.FC = () => {
   const history = useHistory()
   const events = useEvents()
+  const queryClient = useQueryClient()
   const [openNewEventModal, setOpenNewEventModal] = useState(false)
 
   const eventParse = (events: IEvent[] | undefined) => {
@@ -37,7 +39,7 @@ const CalendarPage: React.FC = () => {
   const closeModal = () => setOpenNewEventModal(false)
 
   const onSuccessAddEvent = () => {
-    events.refetch()
+    queryClient.invalidateQueries('events')
     closeModal()
   }
 
