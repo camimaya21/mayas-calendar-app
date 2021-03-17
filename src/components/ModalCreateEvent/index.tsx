@@ -8,6 +8,7 @@ import { IModalCreateEventProps } from './modalCreateEvent.types'
 
 import { EventForm } from 'components/EventForm'
 import { Header } from 'components/Header'
+import { ModalPortal } from 'components/ModalPortal'
 import { ModalWrapper } from 'components/ModalWrapper'
 import { SFormContainer, SModalContent } from './modalCreateEvent.styles'
 
@@ -34,17 +35,19 @@ export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({
   }
 
   return (
-    <ModalWrapper>
-      <SModalContent>
-        <Header pageTitle={t('modalCreateEvent.header')} close onClickIcon={onCloseModal} />
-        <SFormContainer>
-          <EventForm
-            initialValues={initialValues}
-            submitBtnText={t('eventForm.submitBtn')}
-            onCreateEvent={handleOnCreateEvent}
-          />
-        </SFormContainer>
-      </SModalContent>
-    </ModalWrapper>
+    <ModalPortal>
+      <ModalWrapper>
+        <SModalContent>
+          <Header pageTitle={t('modalCreateEvent.header')} close onClickIcon={onCloseModal} />
+          <SFormContainer>
+            <EventForm
+              initialValues={initialValues}
+              submitBtnText={t('eventForm.submitBtn')}
+              onCreateEvent={handleOnCreateEvent}
+            />
+          </SFormContainer>
+        </SModalContent>
+      </ModalWrapper>
+    </ModalPortal>
   )
 }
