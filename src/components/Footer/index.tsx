@@ -1,15 +1,9 @@
 import React from 'react'
-import { LoadingDots } from 'components/Loading'
 import { useTranslation } from 'react-i18next'
 import { SFooter } from './footer.style'
 
 export default function Footer(): JSX.Element {
-  const { t, ready } = useTranslation()
-
-  if (!ready) {
-    return <LoadingDots />
-  }
-
+  const { t } = useTranslation()
   return (
     <SFooter>
       <h3>
