@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { ICreateEvent, IUpdateEvent } from 'api/eventsApi.types'
+import { ICreateEvent, IUpdateEvent } from 'api/types/eventsApi.types'
 import { formatDatesToServer, formatDateToInput } from 'utils/datesFormat'
 import { IEventFormProps } from './eventForm.types'
 

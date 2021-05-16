@@ -8,7 +8,7 @@ import listPlugin from '@fullcalendar/list'
 import interactionPlugin, { DateClickArg } from '@fullcalendar/interaction'
 
 import { useEvents } from 'hooks/queries/events'
-import { IEvent } from 'api/eventsApi.types'
+import { IEvent } from 'api/types/eventsApi.types'
 import { pages } from 'routes/urls'
 
 import { ModalCreateEvent } from 'components/ModalCreateEvent'

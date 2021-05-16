@@ -6,7 +6,7 @@ import { useQueryClient } from 'react-query'
 import { useDeleteEvent, useUpdateEvent } from 'hooks/mutations/events'
 import { useEvent } from 'hooks/queries/events'
 import { pages } from 'routes/urls'
-import { IUpdateEvent } from 'api/eventsApi.types'
+import { IUpdateEvent } from 'api/types/eventsApi.types'
 
 import { Button } from 'components/Button'
 import { EventForm } from 'components/EventForm'

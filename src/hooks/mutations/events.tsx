@@ -2,7 +2,7 @@
 import { useMutation } from 'react-query'
 import { createEvent, updateEvent, deleteEvent } from 'api/eventsApi'
 
-import { ICreateEvent, IUpdateEvent } from 'api/eventsApi.types'
+import { ICreateEvent, IUpdateEvent } from 'api/types/eventsApi.types'
 
 export const useCreateEvent = () =>
   useMutation((data: ICreateEvent) => {

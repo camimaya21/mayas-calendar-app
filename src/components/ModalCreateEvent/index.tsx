@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatTodayToInput, formatTodayAddHours } from 'utils/datesFormat'
 
-import { ICreateEvent } from 'api/eventsApi.types'
+import { ICreateEvent } from 'api/types/eventsApi.types'
 import { useCreateEvent } from 'hooks/mutations/events'
 import { IModalCreateEventProps } from './modalCreateEvent.types'
 

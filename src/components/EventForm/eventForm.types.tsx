@@ -1,4 +1,4 @@
-import { ICreateEvent, IUpdateEvent } from 'api/eventsApi.types'
+import { ICreateEvent, IUpdateEvent } from 'api/types/eventsApi.types'
 
 export interface IEventFormProps {
   onCreateEvent?: (eventFormData: ICreateEvent) => void
