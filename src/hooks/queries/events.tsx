@@ -29,7 +29,7 @@ export function useEvent<TData = IEvent>(
   const customOptions: UseQueryOptions<IEvent, AxiosError, TData> = {
     ...options,
     notifyOnChangeProps: ['data', 'error'],
-    staleTime: 60 * 1000 * 5 // 5 minute
+    staleTime: 60 * 1000 * 5 // 5 minutes
   }
   return useQuery(['event', eventId], () => _fetchEvent(eventId), customOptions)
 }
