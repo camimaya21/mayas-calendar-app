@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { formatTodayToInput, formatTodayAddHours } from 'utils/datesFormat'
+import { toast } from 'react-toastify'
 
 import { ICreateEvent } from 'api/types/eventsApi.types'
 import { useCreateEvent } from 'hooks/mutations/events'
@@ -29,7 +30,11 @@ export const ModalCreateEvent: React.FC<IModalCreateEventProps> = ({
   const handleOnCreateEvent = (formData: ICreateEvent) => {
     createEvent.mutate(formData, {
       onSuccess: () => {
+        toast.success(t('toast.success.createEvent'))
         onSuccessSubmit()
+      },
+      onError: () => {
+        toast.error(t('toast.error.default'))
       }
     })
   }

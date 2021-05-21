@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useHistory, useParams } from 'react-router'
 import { useQueryClient } from 'react-query'
+import { toast } from 'react-toastify'
 
 import { useDeleteEvent, useUpdateEvent } from 'hooks/mutations/events'
 import { useEvent } from 'hooks/queries/events'
@@ -33,8 +34,12 @@ const EventDetailPage: React.FC = () => {
   const onDeleteEvent = () => {
     deleteEvent.mutate(eventId, {
       onSuccess: () => {
+        toast.success(t('toast.success.deleteEvent'))
         queryClient.invalidateQueries('events')
         goBackToHome()
+      },
+      onError: () => {
+        toast.error(t('toast.error.default'))
       }
     })
   }
@@ -42,8 +47,12 @@ const EventDetailPage: React.FC = () => {
   const onUpdateEvent = (dataUpdated: IUpdateEvent) => {
     updateEvent.mutate(dataUpdated, {
       onSuccess: () => {
+        toast.success(t('toast.success.updateEvent'))
         queryClient.invalidateQueries(['event', eventId])
         closeUpdateForm()
+      },
+      onError: () => {
+        toast.error(t('toast.error.default'))
       }
     })
   }

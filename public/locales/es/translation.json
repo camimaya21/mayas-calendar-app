@@ -4,6 +4,16 @@
     "text": " - Un proyecto hecho con  ",
     "by": " por "
   },
+  "toast": {
+    "success": {
+      "createEvent": "Tu evento se ha creado",
+      "updateEvent": "Tu evento se ha actualizado",
+      "deleteEvent": "Tu evento se ha borrado"
+    },
+    "error": {
+      "default": "Ups! Algo ha ido mal. Inténtalo otra vez"
+    }
+  },
   "eventForm": {
     "title": {
       "label": "Título",
