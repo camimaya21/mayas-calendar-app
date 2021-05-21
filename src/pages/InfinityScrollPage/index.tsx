@@ -1,10 +1,16 @@
 import React from 'react'
+
 import { useInfinitySubcategories } from 'hooks/queries/subcategories'
-import { LoadingDots } from 'components/Loading'
 import { useIntersectionObserver } from 'hooks/useIntersectionNotation'
+
+import { LoadingDots } from 'components/Loading'
+import { SSubcategoryItem } from './infinityScrollPage.styles'
+import { SBasicContainer } from 'styles/common'
+
 const InfinityScrollPage: React.FC = () => {
   const { isLoading, data, isFetchingNextPage, fetchNextPage, hasNextPage } = useInfinitySubcategories()
   const loadMoreButtonRef = React.useRef<HTMLButtonElement>(null)
+  const scrollAreaRef = React.useRef<HTMLDivElement>(null)
 
   useIntersectionObserver({
     target: loadMoreButtonRef,
@@ -12,27 +18,33 @@ const InfinityScrollPage: React.FC = () => {
     enabled: hasNextPage
   })
 
-  if (isLoading) return <LoadingDots />
+  if (isLoading)
+    return (
+      <SBasicContainer>
+        <LoadingDots />
+      </SBasicContainer>
+    )
 
   return (
-    <div>
-      <h1>Explore Eventbrite`s Subcategories</h1>
+    <SBasicContainer ref={scrollAreaRef}>
       {data &&
         data.pages.map((page) => (
           <React.Fragment key={page.pagination.page_number}>
             {page.subcategories.map((subcategory) => (
-              <p key={subcategory.id}>{subcategory.name}</p>
+              <SSubcategoryItem key={subcategory.id}>
+                <p>{subcategory.name}</p>
+              </SSubcategoryItem>
             ))}
           </React.Fragment>
         ))}
       {hasNextPage ? (
         <button ref={loadMoreButtonRef} onClick={() => fetchNextPage()}>
-          {isFetchingNextPage ? <LoadingDots /> : 'Explore more categories'}
+          {isFetchingNextPage ? <LoadingDots /> : 'Load more'}
         </button>
       ) : (
-        <p>Nothing more to load</p>
+        <p>No more subcategories to show</p>
       )}
-    </div>
+    </SBasicContainer>
   )
 }
 
